@@ -78,8 +78,14 @@ function getNextFriday(/* date */) {
  * 1, 2024 => 31
  * 2, 2024 => 29
  */
-function getCountDaysInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountDaysInMonth(month, year) {
+  let result = 29;
+  let data = new Date(year, month - 1, result);
+  while (data.getMonth() === month - 1) {
+    result += 1;
+    data = new Date(year, month - 1, result);
+  }
+  return result - 1;
 }
 
 /**
@@ -114,8 +120,8 @@ function getCountDaysOnPeriod(/* dateStart, dateEnd */) {
  * '2024-02-02', { start: '2024-02-02', end: '2024-03-02' } => true
  * '2024-02-10', { start: '2024-02-02', end: '2024-03-02' } => true
  */
-function isDateInPeriod(/* date, period */) {
-  throw new Error('Not implemented');
+function isDateInPeriod(date, period) {
+  return date >= period.start && date <= period.end;
 }
 
 /**
@@ -145,8 +151,18 @@ function formatDate(/* date */) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  let result = 0;
+  let day = 0;
+  let data = new Date(year, month - 1, day);
+  console.debug(data.getMonth(), month - 1);
+  while (data.getMonth() === month - 1) {
+    if (data.getDay() === 0 || data.getDay() === 6) result += 1;
+    day += 1;
+    data = new Date(year, month - 1, day);
+    console.debug(day);
+  }
+  return result;
 }
 
 /**
@@ -177,6 +193,11 @@ function getWeekNumberByDate(/* date */) {
  * Date(2023, 1, 1) => Date(2023, 9, 13)
  */
 function getNextFridayThe13th(/* date */) {
+  // result = date;
+  // while (true){
+  //   if (result.getDay() === 4 && result.day === 4) return result;
+  //   result = result.setDay()
+  // }
   throw new Error('Not implemented');
 }
 
@@ -191,8 +212,8 @@ function getNextFridayThe13th(/* date */) {
  * Date(2024, 5, 1) => 2
  * Date(2024, 10, 10) => 4
  */
-function getQuarter(/* date */) {
-  throw new Error('Not implemented');
+function getQuarter(date) {
+  return Math.trunc(date.getMonth() / 3) + 1;
 }
 
 /**
