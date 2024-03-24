@@ -63,18 +63,19 @@ function getDayName(date) {
  * Date('2024-02-13T00:00:00Z') => Date('2024-02-16T00:00:00Z')
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
-function getNextFriday(date) {
-  let result = new Date(Date.parse(date));
-  result.setUTCHours(0);
-  while (true) {
-    result = new Date(
-      result.getFullYear(),
-      result.getMonth(),
-      result.getDate() + 2
-    );
-    result.setUTCHours(0);
-    if (result.getUTCDay() === 5) return result;
-  }
+function getNextFriday(/* date */) {
+  // let result = new Date(Date.parse(date));
+  // result.setUTCHours(0);
+  // while (true) {
+  //   result = new Date(
+  //     result.getFullYear(),
+  //     result.getMonth(),
+  //     result.getDate() + 2
+  //   );
+  //   result.setUTCHours(0);
+  //   if (result.getUTCDay() === 5) return result;
+  // }
+  throw new Error('Not implemented');
 }
 
 /**
