@@ -198,12 +198,22 @@ function getWeekNumberByDate(date) {
   );
   const startY = new Date(Date.UTC(date.getFullYear(), 0, 1));
   const days = (newDate - startY) / 1000 / 60 / 60 / 24 + 1;
+
   const d = startY.getUTCDay();
-  let result = Math.trunc((days - d) / 7);
-  if (d !== 1) {
+  let dfw = 7 - d + 1;
+  if (d === 1) {
+    dfw = 0;
+  }
+  if (d === 0) {
+    dfw = 1;
+  }
+  const dlw = newDate.getUTCDay();
+
+  let result = (days - dfw - dlw) / 7;
+  if (dfw !== 0) {
     result += 1;
   }
-  if (newDate.getUTCDay() !== 1) {
+  if (dlw !== 0) {
     result += 1;
   }
   return result;
