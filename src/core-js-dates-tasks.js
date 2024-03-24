@@ -203,14 +203,14 @@ function getWeekNumberByDate(/* date */) {
  */
 function getNextFridayThe13th(date) {
   let result = new Date(Date.parse(date));
-  while (true) {
+  while (!(result.getDay() === 5 && result.getDate() === 13)) {
     result = new Date(
       result.getFullYear(),
       result.getMonth(),
       result.getDate() + 1
     );
-    if (result.getDay() === 5 && result.getDate() === 13) return result;
   }
+  return result;
 }
 
 /**
