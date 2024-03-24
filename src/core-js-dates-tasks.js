@@ -63,8 +63,18 @@ function getDayName(date) {
  * Date('2024-02-13T00:00:00Z') => Date('2024-02-16T00:00:00Z')
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
-function getNextFriday(/* date */) {
-  throw new Error('Not implemented');
+function getNextFriday(date) {
+  let result = new Date(Date.parse(date));
+  result.setUTCHours(0);
+  while (true) {
+    result = new Date(
+      result.getFullYear(),
+      result.getMonth(),
+      result.getDate() + 2
+    );
+    result.setUTCHours(0);
+    if (result.getUTCDay() === 5) return result;
+  }
 }
 
 /**
@@ -153,14 +163,12 @@ function formatDate(/* date */) {
  */
 function getCountWeekendsInMonth(month, year) {
   let result = 0;
-  let day = 0;
+  let day = 1;
   let data = new Date(year, month - 1, day);
-  console.debug(data.getMonth(), month - 1);
   while (data.getMonth() === month - 1) {
     if (data.getDay() === 0 || data.getDay() === 6) result += 1;
     day += 1;
     data = new Date(year, month - 1, day);
-    console.debug(day);
   }
   return result;
 }
@@ -192,13 +200,16 @@ function getWeekNumberByDate(/* date */) {
  * Date(2024, 0, 13) => Date(2024, 8, 13)
  * Date(2023, 1, 1) => Date(2023, 9, 13)
  */
-function getNextFridayThe13th(/* date */) {
-  // result = date;
-  // while (true){
-  //   if (result.getDay() === 4 && result.day === 4) return result;
-  //   result = result.setDay()
-  // }
-  throw new Error('Not implemented');
+function getNextFridayThe13th(date) {
+  let result = new Date(Date.parse(date));
+  while (true) {
+    result = new Date(
+      result.getFullYear(),
+      result.getMonth(),
+      result.getDate() + 1
+    );
+    if (result.getDay() === 5 && result.getDate() === 13) return result;
+  }
 }
 
 /**
