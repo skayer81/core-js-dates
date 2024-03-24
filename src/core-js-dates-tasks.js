@@ -63,19 +63,13 @@ function getDayName(date) {
  * Date('2024-02-13T00:00:00Z') => Date('2024-02-16T00:00:00Z')
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
-function getNextFriday(/* date */) {
-  // let result = new Date(Date.parse(date));
-  // result.setUTCHours(0);
-  // while (true) {
-  //   result = new Date(
-  //     result.getFullYear(),
-  //     result.getMonth(),
-  //     result.getDate() + 2
-  //   );
-  //   result.setUTCHours(0);
-  //   if (result.getUTCDay() === 5) return result;
-  // }
-  throw new Error('Not implemented');
+
+function getNextFriday(date) {
+  const result = new Date(date);
+  do {
+    result.setUTCDate(result.getUTCDate() + 1);
+  } while (result.getUTCDay() !== 5);
+  return result;
 }
 
 /**
@@ -146,8 +140,20 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+    timeZone: 'UTC',
+  };
+  return new Intl.DateTimeFormat('en-US', options).format(
+    new Date(Date.parse(date))
+  );
 }
 
 /**
