@@ -216,6 +216,10 @@ function getWeekNumberByDate(date) {
   if (dlw !== 0) {
     result += 1;
   }
+
+  if (d > 4 || d === 0) {
+    result -= 1;
+  }
   return result;
 }
 
