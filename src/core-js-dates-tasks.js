@@ -319,6 +319,7 @@ function getWorkSchedule(period, countWorkDays, countOffDays) {
 function isLeapYear(date) {
   const y = date.getUTCFullYear();
   return (y % 4 === 0 && y % 100 !== 0) || (y % 100 === 0 && y % 400 === 0);
+  throw Error;
 }
 
 module.exports = {
